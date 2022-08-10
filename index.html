@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image Upload</title>
+
+
+<!--------------------------------------------------->
+<!--------------------- BOOTSTRAP 4 ----------------->
+<!--------------------------------------------------->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!--------------------------------------------------->
+<!-------------------- Inline CSS ------------------->
+<!--------------------------------------------------->
+<style type="text/css">
+
+.form {
+  width: 900px;
+  background: #ccc;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+
+.form img {
+  width: 800px;
+}
+
+.form label, form button {
+  background-color: yellow;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 4px solid black;
+  font-size: 2rem;
+  height: auto;
+}
+
+.form label:hover, form button:hover {
+  background-color: red;
+  color: white;
+}
+	
+</style>
+</head>
+
+<body>
+
+
+<!-----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Heading %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------>
+
+<h1 class="text-danger" align="center">Image Preview Created by Ritesh Gorle</h1>
+
+
+<!-----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Preview %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------>
+  <div class="form">
+
+  <div>
+    <label for="image_uploads">Choose an Images</label>
+    <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+  </div>
+
+<!-----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Preview %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------>
+  <div class="preview">
+    <p>No File Selected </p>
+  </div>
+  
+  </div>
+
+
+
+
+<!--------------------------------------------------->
+<!-------------------- JavaScript ------------------->
+<!--------------------------------------------------->
+
+<script type="text/javascript">
+
+var input = document.querySelector('input')
+var preview = document.querySelector('.preview')
+
+input.style.opacity = 0
+var fileTypes = [
+    'image/jpeg',
+    'image/png'
+]
+
+input.addEventListener('change', () => {
+    while (preview.firstChild) {
+        preview.removeChild(preview.firstChild)
+    }
+
+    var curFiles = input.files
+    if (curFiles.length !== 0) {
+        var list = document.createElement('ol')
+        preview.appendChild(list)
+        for (var i = 0; i < curFiles.length; i++) {
+            let listItem = document.createElement('li')
+
+            if (fileTypes.includes(curFiles[i].type)) {
+                var image = document.createElement('img')
+                image.src = window.URL.createObjectURL(curFiles[i])
+
+                listItem.appendChild(image)
+            }
+
+            list.appendChild(listItem)
+        }
+    }
+})
+		
+</script>
+
+
+</body>
+</html>
